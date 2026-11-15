@@ -1,9 +1,12 @@
+
 import java.util.Scanner;
 
 import com.smartdorm.model.Dormitory;
 import com.smartdorm.service.DormitoryConfigurationService;
 import com.smartdorm.ui.StudentManagementMenu;
 import com.smartdorm.ui.RoomManagementMenu;
+import com.smartdorm.ui.DormitoryReportMenu;
+
 public class App {
 
     public static void main(String[] args) {
@@ -26,10 +29,15 @@ public class App {
 
         while (running) {
 
+            System.out.println("\n=================================");
+            System.out.println("          MAIN MENU");
+            System.out.println("=================================");
             System.out.println("1. Student Management");
             System.out.println("2. Room Management");
             System.out.println("3. Dormitory Information");
+            System.out.println("4. Dormitory Reports");
             System.out.println("0. Exit System");
+            System.out.println("=================================");
 
             System.out.print("Enter your choice: ");
 
@@ -45,29 +53,39 @@ public class App {
                     studentMenu.displayMenu();
                     break;
 
-case "2":
+                case "2":
 
-    RoomManagementMenu roomMenu =
-            new RoomManagementMenu(dormitory);
+                    RoomManagementMenu roomMenu =
+                            new RoomManagementMenu(dormitory);
 
-    roomMenu.displayMenu();
-    break;
+                    roomMenu.displayMenu();
+                    break;
 
-case "3":
+                case "3":
 
-    dormitory.displayDormitoryInformation();
-    break;
+                    dormitory.displayDormitoryInformation();
+                    break;
+
+                case "4":
+
+                    DormitoryReportMenu reportMenu =
+                            new DormitoryReportMenu(dormitory);
+
+                    reportMenu.displayMenu();
+                    break;
 
                 case "0":
 
                     running = false;
+
                     System.out.println(
                             "\nThank you for using Smart Dormitory Management System!");
                     break;
 
                 default:
 
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(
+                            "Invalid choice. Please try again.");
             }
         }
 

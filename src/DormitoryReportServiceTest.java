@@ -66,17 +66,33 @@ public class DormitoryReportServiceTest {
                 Gender.MALE
         );
 
-       boolean registered = controller.registerStudent(student);
+        // Register student
+        boolean registered = controller.registerStudent(student);
 
-System.out.println("Registration result: " + registered);
+        System.out.println("Registration result: " + registered);
 
-Student found = controller.searchStudent("REPORT001");
+        // Verify the original student ID
+        System.out.println(
+                "Original Student ID: " + student.getStudentId());
 
-System.out.println("Student found: " + (found != null));
+        // Verify the registered student count
 
-boolean allocated = controller.allocateStudent("REPORT001");
 
-System.out.println("Allocation result: " + allocated);
+        // Search for the registered student
+        Student found = controller.searchStudent("HU/REPORT/001");
+
+        System.out.println("Student found: " + (found != null));
+
+        // Allocate only if the student was found
+        boolean allocated = false;
+
+        if (found != null) {
+            allocated = controller.allocateStudent("HU/REPORT/001");
+        }
+
+        System.out.println("Allocation result: " + allocated);
+
+        // Display reports after allocation
         reportService.displayOverallReport(dormitory);
 
         reportService.displayRoomOccupancySummary(dormitory);
